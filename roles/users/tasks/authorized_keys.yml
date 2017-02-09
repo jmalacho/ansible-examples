@@ -1,0 +1,16 @@
+---
+# Pulled out so that we can condition off changed public key to enforce key rotation 
+
+- name: Add public key
+  authorized_key:
+    user: "{{ item.key }}"
+    key: "{{ item.value.key }}"
+  register: result
+
+- name: Change Expiration for publickey users
+  command: chage -m 0 -M {{ users_keyrotation_days }} -I -1 -E -1 {{ item.key }}
+  when: result|changed
+
+- name: Reset "password changed" on keyrotation
+  command: chage -d {{ 0 | daysSinceEpoc }} {{ item.key }}
+  when: result|changed

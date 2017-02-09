@@ -1,0 +1,27 @@
+---
+- name: Create user
+  user:
+    name: "{{ item.key}}"
+    groups: "{{ item.value.groups | join(\",\") }}"
+  with_dict: "{{ users }}"
+
+- include: authorized_keys.yml
+  with_dict: "{{ users }}"
+
+- name: Add public key
+  authorized_key:
+    user: "{{ item.key }}"
+    key: "{{ item.value.key }}"
+  with_dict: "{{ users }}"
+
+
+# Example of sudoers.d creation
+#-  template: src=sudoers.d__ec2-user.j2 dest=/etc/sudoers.d/service-users mode=0440  validate='visudo -cf %s'
+
+- name: Template /etc/sudoers 
+  template: src=sudoers.j2 dest=/etc/sudoers mode=0440 validate='visudo -cf %s'
+
+# Usefull in removing the default user in the cloud like "ec2-user" or "centos"
+- name: Remove Old Users
+  user: name={{ item }} state=absent
+  with_items: "{{ users_blacklist }}"

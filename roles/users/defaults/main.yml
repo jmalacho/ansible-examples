@@ -1,0 +1,8 @@
+# usernames provided as dictionary so they can be merged if you feel like being that clever
+users:
+#  username1:
+#    key: ssh-rsa key== comment
+#    groups: [ 'wheel' ]
+
+users_blacklist: []
+users_keyrotation_days: 365

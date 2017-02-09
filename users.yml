@@ -1,0 +1,11 @@
+---
+- hosts: all
+  vars:
+    users:
+      jmalachowski:
+        key: ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAthjxt21PIsy/55rde53tl0EM0RpSd07Wq58TOT+W9VDtl5bq7rhc6AzgwHlAS3+po/zwiAaYYQWyDg+MEZiCR6WONlDER+hLZcL2EEByVj40blCJBwDiEF1ymApT0BSYwxywCnnAibAGvHhCT5fA/oHyfWpXn/1Fgv9VD4KtfFiJlDw5KY0JnPGqDlJkQGZjnMEG7YUA5Wz8FK2buoBGHGIcJT2JRhMVTDPM3EFcnXY4KDSYi8Hhs1qr5uOxV4SyLbzm73eAJaRnOW4dAO2alwSDP+l7gqZaJn21XW71Sqx7FzR2c68Wl6+pPdiXBp2zU2qWPO7g0Xodbphsx3asZw== Example@public.key
+        groups: [ 'wheel' ]
+    users_blacklist: [ 'centos '] 
+
+  roles:
+  - users
