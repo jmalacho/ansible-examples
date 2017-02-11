@@ -1,0 +1,9 @@
+---
+- hosts: all
+  vars:
+    etc_hosts_aliases:
+      192.168.1.2: [ jenkins ]
+      192.168.1.3: [ sonarqube ]
+      192.168.1.4: [ nexus ]
+  roles:
+  - etc_hosts

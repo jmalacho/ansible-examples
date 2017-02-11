@@ -1,0 +1,20 @@
+---
+- name: Initializing Dictionary with every ip from the "environment" group
+  set_fact:
+    etc_hosts: "{{ [] | initDict( groups[domain]  ) }}"
+
+- name: Create the FQDN and short names using the inventory variables
+  set_fact:
+    etc_hosts: "{{ etc_hosts | mergeInventory( domain, groups, hostvars ) }}"
+
+- name: Merge in etc_hosts_alias variable for /etc/hosts aliases
+  set_fact:
+    etc_hosts: "{{ etc_hosts | mergeDictOfArrays( etc_hosts_aliases ) }}"
+
+- debug: var=etc_hosts
+
+- name: Template /etc/hosts
+  template: src=etc__hosts.j2 dest=/etc/hosts owner=root group=root mode=0644
+
+- hostname: name={{ hostname }}.{{ domain }}
+
