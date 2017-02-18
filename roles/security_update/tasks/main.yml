@@ -1,0 +1,24 @@
+---
+- yum: state=latest name="*"
+  register: result
+
+- set_fact:
+    yum_stdout: "{{ result.results | first }}"
+    
+- set_fact:
+    needs_reboot: "{{ yum_stdout | isRebootNeeded( security_update.reboot_packages )}}"
+
+- debug: msg="Needs rebooting"
+  when: needs_reboot
+
+- name: restart machine
+  command: shutdown -r now "Ansible updates triggered"
+  async: 0
+  poll: 0
+  ignore_errors: true
+  when: needs_reboot
+
+- name: Wait for SSH to come up
+  local_action: wait_for host="{{ ansible_ssh_host | default(inventory_hostname) }}" port=22 delay=30 timeout=320 state=started
+  retries: 2 
+  sudo: false

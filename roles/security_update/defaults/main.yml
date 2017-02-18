@@ -1,0 +1,8 @@
+---
+# https://access.redhat.com/solutions/27943
+security_update:
+  reboot_packages:
+  - kernel
+  - kernel-firmware
+  - glibc
+  - hal
