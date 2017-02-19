@@ -29,4 +29,5 @@ Example playbook: etc_hosts.yml
 
 ## security_update
 
+A Common security update required reboots. Some good example code of rebooting under certain conditions and waiting for reboot.
 Example playbook: security_update.yml
