@@ -1,0 +1,10 @@
+---
+- hosts: all
+  gather_facts: false
+  pre_tasks:
+  - debug: msg="hello"
+
+  - jon:
+      action: list
+    register: result
+  - debug: var=result
