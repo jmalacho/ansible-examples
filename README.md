@@ -31,3 +31,7 @@ Example playbook: etc_hosts.yml
 
 A Common security update required reboots. Some good example code of rebooting under certain conditions and waiting for reboot.
 Example playbook: security_update.yml
+
+## yum versionlock
+
+[1] http://blog.toast38coza.me/custom-ansible-module-hello-world/
