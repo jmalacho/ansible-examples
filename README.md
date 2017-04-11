@@ -26,7 +26,7 @@ domain="devops.local"
 
 Used when you don't have have real networking and you need to abuse /etc/hosts to fake hostnames. It will combine ips from the inventory with the fact dictionary "etc_hosts_aliases"
 
-Example: Group Vars
+Example Group Variable file
 ```
 etc_hosts_alias:
   192.168.1.2: [ jenkins ]
