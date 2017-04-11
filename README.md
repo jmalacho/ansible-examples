@@ -25,6 +25,14 @@ domain="devops.local"
 ```
 
 Used when you don't have have real networking and you need to abuse /etc/hosts to fake hostnames. It will combine ips from the inventory with the fact dictionary "etc_hosts_aliases"
+
+Example: Group Vars
+```
+etc_hosts_alias:
+  192.168.1.2: [ jenkins ]
+  192.168.1.3: [ sonar ]
+  192.168.1.4: [ nexus ]
+```
 Example playbook: etc_hosts.yml
 
 ## security_update
